@@ -1,0 +1,18 @@
+.header {
+
+  section {
+    height: 200px;
+    background-color: #0D559F;
+    width: auto;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: end;
+  }
+
+  img {
+    position: absolute;
+    top: 40px;
+  }
+
+}
