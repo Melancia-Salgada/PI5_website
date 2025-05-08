@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.scss'
 import Header from './components/Header'
-import Title from './components/Title'
+import Form from './components/Form'
 
 function App() {
 
@@ -10,9 +10,8 @@ function App() {
     <main className='content-container'>
       <Header/>
       <div className='engloba'>
-        <Title nome={'Dados Pessoais'}/>
+        <Form/>
       </div>
-      
     </main>
    </>
   )
