@@ -18,5 +18,10 @@ body, input {
 }
 
 .engloba {
+  display: flex;
+  justify-content: center;
   margin: 0 140px;
+  @media (max-width: 700px) {
+    margin: 0 40px;
+  }
 }

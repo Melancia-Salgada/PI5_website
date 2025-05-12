@@ -1,5 +1,16 @@
+.form{
+  width: 1500px;
+}
 .divider {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 24px;
+
+  @media (max-width: 700px) {
+    display: block;
+  }
+}
+.esquerda{
+  display: flex;
+  flex-direction: column;
 }
