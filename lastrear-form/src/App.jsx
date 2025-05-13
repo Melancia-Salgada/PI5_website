@@ -7,7 +7,7 @@ import Footer from './components/Footer'
 
 function App() {
 
-  const [segundoParticipante, degundoParticipante] = useState(false)
+  const [segundoParticipante, setSegundoParticipante] = useState('')
   const [dadosPart1, setDadosPart1] = useState('')
   const [dadosPart2, setDadosPart2] = useState('')
   
@@ -15,22 +15,24 @@ function App() {
    <>
     <main className='content-container'>
       <Header/>
-      <div className='engloba'>
         {segundoParticipante && 
           <>
             <Title nome={'Participante 1'}/>
-            <Form/>
           </>
         }
-
-        <Form/>
+      <div className='engloba'>
+        <Form segundoParticipante={segundoParticipante} onChangePart={valor => setSegundoParticipante(valor)}/>
+      </div>
         {segundoParticipante && 
           <>
             <Title nome={'Participante 2'}/>
-            <Form/>
+          <div className='engloba'>
+            <Form isSegundo/>
+          </div>
           </>
+            
         }
-      </div>
+      
       <Footer/>
     </main>
    </>

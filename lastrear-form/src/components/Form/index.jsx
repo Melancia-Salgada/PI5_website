@@ -4,7 +4,7 @@ import Title from '../Title'
 import './Form.scss'
 import Dropdown from '../Dropdown'
 
-function Form() {
+function Form({segundoParticipante, onChangePart, isSegundo}) {
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
   const [cpf, setCpf] = useState('')
@@ -60,8 +60,6 @@ function Form() {
   }, [imovelNome])
   
   
-
-
 
   function onClick(evento) {
     evento.preventDefault()
@@ -187,7 +185,10 @@ function Form() {
           }
           
           <Dropdown obrigatorio label='Imóvel Registrado no Nome?' itens={['Sim', 'Não']} valor={checarVariavel(imovelNome)} onChange={valor => setImovelNome(valor)} />
-          <Dropdown label='Possui Algum Familiar ou Amigo que possa completar a Renda?' itens={['Sim', 'Não']} />
+          {!isSegundo && 
+          <Dropdown obrigatorio label='Possui Algum Familiar ou Amigo que possa completar a Renda?' itens={['Sim', 'Não']} valor={checarVariavel(segundoParticipante)} onChange={onChangePart}/>
+          }
+          
         
       </div>
       <div>
@@ -195,8 +196,11 @@ function Form() {
           <Dropdown label='Procura:' itens={['Casa', 'Apartamento']} valor={procura} onChange={valor=>setProcura(valor)}/>
           <Dropdown label='Tipo:' itens={['Novo', 'Usado']} valor={tipoImovel} onChange={valor=>setTipoImovel(valor)}/>
       </div>
-
-      <button>Teste</button>
+        
+      {!segundoParticipante &&
+        <button>Teste</button>
+      }
+      
     </form>
   )
 }
