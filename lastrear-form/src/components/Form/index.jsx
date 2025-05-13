@@ -18,6 +18,8 @@ function Form() {
   const [tipoRenda, setTipoRenda] = useState('')
   const [usarFgts, setUsarFgts] = useState('')
   const [imovelNome, setImovelNome] = useState('')
+  const [procura, setProcura] = useState('')
+  const [tipoImovel, setTipoImovel] = useState('')
 
   function onClick(evento) {
     evento.preventDefault()
@@ -35,7 +37,9 @@ function Form() {
       restricao,
       tipoRenda,
       usarFgts,
-      imovelNome
+      imovelNome,
+      tipoImovel,
+      procura
     })
 
     setNome('')
@@ -51,6 +55,8 @@ function Form() {
     setTipoRenda('')
     setUsarFgts('')
     setImovelNome('')
+    setTipoImovel('')
+    setProcura('')
 
     window.scrollTo(0, 0)
   }
@@ -68,6 +74,7 @@ function Form() {
     <form className='form' onSubmit={onClick}>
       <div>
         <Title nome='Dados Pessoais' />
+
         <Input obrigatorio label='Nome completo' type='text' name='nome' valor={nome} onChange={valor => setNome(valor)} />
         
         <div className='divider'>
@@ -88,7 +95,7 @@ function Form() {
 
       <div>
         <Title nome='Financeiro' />
-        <div className='esquerda'>
+        
           <Dropdown obrigatorio label='Declara imposto de renda?' itens={['Sim', 'Não']} valor={checarVariavel(imposto)} onChange={valor => setImposto(valor)} />
           <Dropdown obrigatorio label='Tem Compromisso Financeiro no Holerite?' itens={['Sim', 'Não']} valor={checarVariavel(holerite)} onChange={valor => setHolerite(valor)} />
           <Dropdown obrigatorio label='Possui Restrição no nome?' itens={['Sim', 'Não']} valor={checarVariavel(restricao)} onChange={valor => setRestricao(valor)} />
@@ -96,7 +103,13 @@ function Form() {
           <Dropdown obrigatorio label='Vai utilizar FGTS?' itens={['Sim', 'Não']} valor={checarVariavel(usarFgts)} onChange={valor => setUsarFgts(valor)} />
           <Dropdown obrigatorio label='Imóvel Registrado no Nome?' itens={['Sim', 'Não']} valor={checarVariavel(imovelNome)} onChange={valor => setImovelNome(valor)} />
           <Dropdown label='Possui Algum Familiar ou Amigo que possa completar a Renda?' itens={['Sim', 'Não']} />
-        </div>
+        
+      </div>
+      <div>
+        <Title nome='Imóvel'/>
+
+          <Dropdown label='Procura:' itens={['Casa', 'Apartamento']} valor={procura} onChange={valor=>setProcura(valor)}/>
+          <Dropdown label='Tipo:' itens={['Novo', 'Usado']} valor={tipoImovel} onChange={valor=>setTipoImovel(valor)}/>
       </div>
 
       <button>Teste</button>

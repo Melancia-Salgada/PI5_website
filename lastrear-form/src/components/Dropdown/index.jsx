@@ -1,7 +1,7 @@
 import React from 'react'
 import './Dropdown.scss'
 
-function Dropdown({label='colocar nome', obrigatorio, itens, onChange, valor}) {
+function Dropdown({label='colocar nome', obrigatorio=false, itens, onChange, valor}) {
   
   const aoAlterar = (e) => {
     const valorSelecionado = e.target.value
