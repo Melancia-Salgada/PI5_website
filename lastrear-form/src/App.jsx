@@ -8,7 +8,9 @@ import Footer from './components/Footer'
 function App() {
 
   const [segundoParticipante, degundoParticipante] = useState(false)
-
+  const [dadosPart1, setDadosPart1] = useState('')
+  const [dadosPart2, setDadosPart2] = useState('')
+  
   return (
    <>
     <main className='content-container'>
