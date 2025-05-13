@@ -1,8 +1,10 @@
+@use '../../variables' as *;
+
 .header {
 
   section {
     height: 200px;
-    background-color: #0D559F;
+    background-color: $cor-azul-principal;
     width: auto;
     display: flex;
     position: relative;

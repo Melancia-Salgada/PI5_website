@@ -1,6 +1,8 @@
+@use '../../variables' as *;
+
 .input {
   width: 100%;
-  margin-top: 24px;
+  margin-top: 28px;
 
   label {
     font-size: 20px;
@@ -12,7 +14,7 @@
     box-sizing: border-box; 
     font-size: 16px;
     padding: 16px 20px;
-    background-color: #EFEFEF;
+    background-color: $cor-input-cinza;
     margin-top: 10px;
     border: none;
     border-radius: 15px;
@@ -20,9 +22,13 @@
     border: 3px solid transparent;
 
     &:focus {
-      background-color: #FDFDFD;
-      border: 3px solid #8D8D8D;
+      background-color: $cor-input-foco;
+      border: 3px solid $cor-input-borda;
       outline: none;
+    }
+
+    &:hover{
+      cursor: pointer;
     }
   }
 
