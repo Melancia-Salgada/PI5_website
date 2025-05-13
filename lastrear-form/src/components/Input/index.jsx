@@ -12,7 +12,7 @@ function Input({label=false, type ='', name, placeholder='', valor, onChange, ob
       {label && 
       <label>{label}</label>
       }
-      <input type={type} onChange={aoAlterar} name={name} required={obrigatorio} placeholder={placeholder} value={valor} />
+      <input type={type} onChange={aoAlterar} name={name} required={obrigatorio} placeholder={placeholder} value={valor} onWheel={(e) => e.target.blur()}/>
     </div>
   )
 }
