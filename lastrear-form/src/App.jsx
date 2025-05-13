@@ -3,6 +3,7 @@ import './App.scss'
 import Header from './components/Header'
 import Form from './components/Form'
 import Title from './components/Title'
+import Footer from './components/Footer'
 
 function App() {
 
@@ -28,7 +29,7 @@ function App() {
           </>
         }
       </div>
-      
+      <Footer/>
     </main>
    </>
   )
