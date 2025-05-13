@@ -4,7 +4,7 @@ import Title from '../Title'
 import './Form.scss'
 import Dropdown from '../Dropdown'
 
-function Form({segundoParticipante, onChangePart, isSegundo}) {
+function Form({segundoParticipante, onChangePart, isSegundo, setDados}) {
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
   const [cpf, setCpf] = useState('')
@@ -32,7 +32,7 @@ function Form({segundoParticipante, onChangePart, isSegundo}) {
   const [telefone1, setTelefone1] = useState('')
   const [telefone2, setTelefone2] = useState('')
 
-  //Reseta variaveis fechadas
+
   useEffect(() => {
     if (restricao === 'Não') {
       setValorRestricao('')
@@ -56,38 +56,45 @@ function Form({segundoParticipante, onChangePart, isSegundo}) {
 
   useEffect(() => {
     if (imovelNome === 'Não') {
+      setImovelNome(false)
     }
   }, [imovelNome])
   
+
   
 
   function onClick(evento) {
     evento.preventDefault()
   
-    console.log({
-      nome,
-      email,
-      cpf,
-      nascimento,
-      telefone1,
-      telefone2,
-      estCivil,
-      nacionalidade,
-      escolaridade,
-      imposto,
-      holerite,
-      restricao,
-      valorRestricao,
-      tipoRenda,
-      rendaFormal,
-      rendaInformal,
-      tempoCarteira,
-      usarFgts,
-      anoFgts,
-      imovelNome,
-      tipoImovel,
-      procura
-    })
+    const dados = {
+      [!isSegundo? 'Participante 1': 'Participante 2'] :{
+        nome,
+        email,
+        cpf,
+        nascimento,
+        telefone1,
+        telefone2,
+        estCivil,
+        nacionalidade,
+        escolaridade,
+        imposto,
+        holerite,
+        restricao,
+        valorRestricao,
+        tipoRenda,
+        rendaFormal,
+        rendaInformal,
+        tempoCarteira,
+        usarFgts,
+        anoFgts,
+        imovelNome,
+        tipoImovel,
+        procura,
+        segundoParticipante,
+      }
+    }
+
+    setDados(dados)
   
     setNome('')
     setEmail('')
@@ -110,7 +117,8 @@ function Form({segundoParticipante, onChangePart, isSegundo}) {
     setAnoFgts('')
     setImovelNome('')
     setTipoImovel('')
-    setProcura('')
+    setProcura(''),
+    onChangePart('')
   
     window.scrollTo(0, 0)
   }
@@ -197,9 +205,7 @@ function Form({segundoParticipante, onChangePart, isSegundo}) {
           <Dropdown label='Tipo:' itens={['Novo', 'Usado']} valor={tipoImovel} onChange={valor=>setTipoImovel(valor)}/>
       </div>
         
-      {!segundoParticipante &&
-        <button>Teste</button>
-      }
+      
       
     </form>
   )
