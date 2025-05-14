@@ -1,0 +1,24 @@
+@use '../../variables' as *;
+
+.bubble {
+  background-color: $cor-amarelo-principal;
+  padding: 16px 16px;
+  position: fixed;
+  font-size: 40px;
+  color: $cor-input-foco;
+  border-radius: 50px;
+  display: flex;
+  bottom: 0;
+  right: 0;
+  margin-right: 16px;
+  margin-bottom: 16px;
+  cursor: pointer;
+
+  &:hover{
+    background-color: $cor-amarelo-escuro;
+  }
+
+  &:active{
+    background-color: $cor-amarelo-claro;
+  }
+}

@@ -5,6 +5,8 @@ import Form from "./components/Form";
 import Title from "./components/Title";
 import Footer from "./components/Footer";
 import Button from "./components/Button";
+import { FaWhatsapp } from "react-icons/fa";
+import Bubble from "./components/Bubble";
 
 function App() {
   const [segundoParticipante, setSegundoParticipante] = useState("");
@@ -36,7 +38,7 @@ function App() {
               <div>
                 {segundoParticipante && (
                   <>
-                    <Title nome={"Participante 1"} />
+                    <Title principal nome={"Participante 1"} />
                   </>
                 )}
                 <Form
@@ -50,7 +52,7 @@ function App() {
               <div>
                 {segundoParticipante && (
                   <>
-                    <Title nome={"Participante 2"} />
+                    <Title principal nome={"Participante 2"} />
                     <Form isSegundo setDados={(valor) => setDadosPart2(valor)} setResetForm={(valor) => setResetForm(valor)}/>
                   </>
                 )}
@@ -65,6 +67,10 @@ function App() {
           </form>
           
         <Footer />
+
+        <Bubble link={'https://wa.me/'}>
+          <FaWhatsapp/>
+        </Bubble>
       </main>
     </>
   );

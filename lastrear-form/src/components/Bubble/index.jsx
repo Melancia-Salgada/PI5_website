@@ -1,10 +1,11 @@
 import React from 'react'
+import './Bubble.scss'
 
-function Bubble() {
+function Bubble({children,link}) {
   return (
-    <div>
-      
-    </div>
+    <a className='bubble' href={link} target='_blanck'>
+      {children}
+    </a>
   )
 }
 
