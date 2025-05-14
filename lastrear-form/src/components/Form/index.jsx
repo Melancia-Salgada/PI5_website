@@ -153,7 +153,7 @@ function Form({segundoParticipante, onChangePart='', isSegundo, setDados, setRes
         </div>
 
         <div className='divider'>
-          <Input obrigatorio label='Data de Nascimento' type='date' name='nascimento' valor={nascimento} onChange={valor => setNascimento(valor)} />
+          <Input obrigatorio label='Data de Nascimento' type='data' name='nascimento' valor={nascimento} onChange={valor => setNascimento(valor)} placeholder='dd/mm/aaaa'/>
           <Dropdown obrigatorio label='Estado civil' itens={['Solteiro', 'Casado', 'Divorciado', 'Viúvo', 'Separado']} valor={estCivil} onChange={valor => setEstCivil(valor)} />
         </div>
 

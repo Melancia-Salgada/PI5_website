@@ -32,6 +32,15 @@ function Input({label=false, type ='', name, placeholder='', valor, onChange, ob
     return numeroFormatado;
   };
 
+  const formatarData = (valor) => {
+  return valor
+    .replace(/\D/g, '') 
+    .replace(/(\d{2})(\d)/, '$1/$2') 
+    .replace(/(\d{2})(\d)/, '$1/$2') 
+    .slice(0, 10); 
+};
+
+
 
 
   const aoAlterar = (e) => {
@@ -43,10 +52,13 @@ function Input({label=false, type ='', name, placeholder='', valor, onChange, ob
     valorDigitado = formatarCPF(valorDigitado);
   } else if (type === 'money') {
     valorDigitado = formatarDinheiro(valorDigitado);
+  } else if (type === 'data') {
+    valorDigitado = formatarData(valorDigitado);
   }
 
   onChange(valorDigitado);
 };
+
 
 
 

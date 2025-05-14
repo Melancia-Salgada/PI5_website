@@ -7,7 +7,7 @@ function Header() {
   return (
     <header className='header'>
       <section>
-        <img src={logo}/>
+        <img src={logo} draggable="false"/>
       </section>
     </header>
   )
