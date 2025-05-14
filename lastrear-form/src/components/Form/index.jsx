@@ -140,16 +140,16 @@ function Form({segundoParticipante, onChangePart='', isSegundo, setDados, setRes
       <div>
         <Title nome='Dados Pessoais' />
 
-        <Input obrigatorio label='Nome completo' type='text' name='nome' valor={nome} onChange={valor => setNome(valor)} />
+        <Input obrigatorio label='Nome completo' type='text' name='nome' valor={nome} onChange={valor => setNome(valor)} placeholder='Nome completo'/>
         
         <div className='divider'>
-          <Input obrigatorio label='Email' type='email' name='email' valor={email} onChange={valor => setEmail(valor)} />
-          <Input obrigatorio label='CPF' type='number' name='cpf' valor={cpf} onChange={valor => setCpf(valor)} />
+          <Input obrigatorio label='Email' type='email' name='email' valor={email} onChange={valor => setEmail(valor)} placeholder='exemplo@exemplo.com'/>
+          <Input obrigatorio label='CPF' type='cpf' name='cpf' valor={cpf} onChange={valor => setCpf(valor)} placeholder="123.456.789-00" />
         </div>
 
         <div className='divider'>
-          <Input obrigatorio label='Telefone 1' type='tel' name='telefone1' valor={telefone1} onChange={valor => setTelefone1(valor)} placeholder='00 000000000'/>
-          <Input label='Telefone 2' type='tel' name='telefone2' valor={telefone2} onChange={valor => setTelefone2(valor)}  placeholder='00 000000000' />
+          <Input obrigatorio label='Telefone 1' type='tel' name='telefone1' valor={telefone1} onChange={valor => setTelefone1(valor)} placeholder='(00) 12345-6789'/>
+          <Input label='Telefone 2' type='tel' name='telefone2' valor={telefone2} onChange={valor => setTelefone2(valor)}  placeholder='(00) 12345-6789' />
         </div>
 
         <div className='divider'>
@@ -158,8 +158,8 @@ function Form({segundoParticipante, onChangePart='', isSegundo, setDados, setRes
         </div>
 
         <div className='divider'>
-          <Input obrigatorio label='Nacionalidade' type='text' name='nacionalidade' valor={nacionalidade} onChange={valor => setNacionalidade(valor)} />
-          <Input obrigatorio label='Escolaridade' type='text' name='escolaridade' valor={escolaridade} onChange={valor => setEscolaridade(valor)} />
+          <Input obrigatorio label='Nacionalidade' type='text' name='nacionalidade' valor={nacionalidade} onChange={valor => setNacionalidade(valor)} placeholder='Nacionalidade'/>
+          <Input obrigatorio label='Escolaridade' type='text' name='escolaridade' valor={escolaridade} onChange={valor => setEscolaridade(valor)} placeholder='Escolaridade'/>
         </div>
       </div>
 
@@ -171,7 +171,7 @@ function Form({segundoParticipante, onChangePart='', isSegundo, setDados, setRes
           
           <Dropdown obrigatorio label='Possui Restrição no nome?' itens={['Sim', 'Não']} valor={checarVariavel(restricao)} onChange={valor => setRestricao(valor)} />
           {restricao &&
-            <Input label='Valor da restrição' type='number' valor={valorRestricao} onChange={valor => setValorRestricao(valor)}/>
+            <Input label='Valor da restrição' type='money' valor={valorRestricao} onChange={valor => setValorRestricao(valor)}  placeholder='Valor'/>
           }
           
           <Dropdown obrigatorio label='Tipo de Renda:' itens={['Formal', 'Informal', 'Ambos']} valor={tipoRenda} onChange={valor => setTipoRenda(valor)} />
@@ -179,13 +179,13 @@ function Form({segundoParticipante, onChangePart='', isSegundo, setDados, setRes
           {(tipoRenda === 'Formal' || tipoRenda === 'Ambos') &&
             <>
               <Dropdown obrigatorio label='1 Mês de Carteira Assinada?' itens={['Sim', 'Não']} valor={checarVariavel(tempoCarteira)} onChange={valor => setTempoCarteira(valor)} />
-              <Input obrigatorio label='Renda Bruta Formal:' type='number' valor={rendaFormal} onChange={valor => setRendaFormal(valor)}/>
+              <Input obrigatorio label='Renda Bruta Formal:' type='money' valor={rendaFormal} onChange={valor => setRendaFormal(valor)} placeholder='Valor'/>
             </>
             
             
           }
           {(tipoRenda === 'Informal' || tipoRenda === 'Ambos') &&
-            <Input obrigatorio label='Renda Bruta Informal:' type='number' valor={rendaInformal} onChange={valor => setRendaInformal(valor)}/>
+            <Input obrigatorio label='Renda Bruta Informal:' type='money' valor={rendaInformal} onChange={valor => setRendaInformal(valor)}  placeholder='Valor'/>
           }
           </div>
           
