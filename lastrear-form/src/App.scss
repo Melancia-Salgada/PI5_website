@@ -9,20 +9,37 @@ figure, h5, h3, h4, h2, h1, body, p {
 
 body, input {
   font-family: 'Inter', sans-serif;
+
 }
+
 
 .content-container{
   display: flex;
   flex-direction: column;
 }
 
+.aaa {
+  display: flexbox;
+  flex-direction: column;
+}
+
+.btn{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
 .engloba {
   padding: 120px 0px 40px 0px;
   display: flex;
-  justify-content: center;
-  flex-direction: row;
-  margin: 0 140px;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 1500px;
+  width: calc(100% - 280px); 
+
   @media (max-width: 840px) {
-    margin: 0 40px;
+    width: 100%;
+    width: calc(100% - 80px); 
   }
 }
+

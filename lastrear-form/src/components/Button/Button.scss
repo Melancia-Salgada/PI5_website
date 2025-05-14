@@ -1,0 +1,20 @@
+@use '../../variables' as *;
+
+.botao{
+  background-color: $cor-amarelo-principal;
+  padding: 14px 40px;
+  font-size: 24px;
+  color: $cor-input-foco;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:hover{
+    background-color: $cor-amarelo-escuro;
+  }
+
+  &:active{
+    background-color: $cor-amarelo-claro;
+  }
+}

@@ -4,7 +4,7 @@ import Title from '../Title'
 import './Form.scss'
 import Dropdown from '../Dropdown'
 
-function Form({segundoParticipante, onChangePart, isSegundo, setDados}) {
+function Form({segundoParticipante, onChangePart='', isSegundo, setDados, setResetForm, resetForm}) {
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
   const [cpf, setCpf] = useState('')
@@ -60,42 +60,43 @@ function Form({segundoParticipante, onChangePart, isSegundo, setDados}) {
     }
   }, [imovelNome])
   
-
   
-
-  function onClick(evento) {
-    evento.preventDefault()
-  
+  useEffect(() => {
     const dados = {
-      [!isSegundo? 'Participante 1': 'Participante 2'] :{
-        nome,
-        email,
-        cpf,
-        nascimento,
-        telefone1,
-        telefone2,
-        estCivil,
-        nacionalidade,
-        escolaridade,
-        imposto,
-        holerite,
-        restricao,
-        valorRestricao,
-        tipoRenda,
-        rendaFormal,
-        rendaInformal,
-        tempoCarteira,
-        usarFgts,
-        anoFgts,
-        imovelNome,
-        tipoImovel,
-        procura,
-        segundoParticipante,
-      }
+      nome,
+      email,
+      cpf,
+      nascimento,
+      telefone1,
+      telefone2,
+      estCivil,
+      nacionalidade,
+      escolaridade,
+      imposto,
+      holerite,
+      restricao,
+      valorRestricao,
+      tipoRenda,
+      rendaFormal,
+      rendaInformal,
+      tempoCarteira,
+      usarFgts,
+      anoFgts,
+      imovelNome,
+      tipoImovel,
+      procura,
+      segundoParticipante,
     }
 
     setDados(dados)
-  
+  }, [
+      nome, email, cpf, nascimento, telefone1, telefone2,
+      estCivil, nacionalidade, escolaridade, imposto, holerite,
+      restricao, valorRestricao, tipoRenda, rendaFormal, rendaInformal,
+      tempoCarteira, usarFgts, anoFgts, imovelNome, tipoImovel, procura, segundoParticipante
+  ])
+
+  useEffect (() =>{
     setNome('')
     setEmail('')
     setCpf('')
@@ -117,11 +118,13 @@ function Form({segundoParticipante, onChangePart, isSegundo, setDados}) {
     setAnoFgts('')
     setImovelNome('')
     setTipoImovel('')
-    setProcura(''),
-    onChangePart('')
-  
-    window.scrollTo(0, 0)
-  }
+    setProcura('')
+    {!isSegundo &&
+      onChangePart('')
+    }
+    setResetForm(false)
+
+  }, [resetForm])
 
   
   function checarVariavel(valor) {
@@ -133,7 +136,7 @@ function Form({segundoParticipante, onChangePart, isSegundo, setDados}) {
   
 
   return (
-    <form className='form' onSubmit={onClick}>
+    <div className='form'>
       <div>
         <Title nome='Dados Pessoais' />
 
@@ -199,15 +202,16 @@ function Form({segundoParticipante, onChangePart, isSegundo, setDados}) {
           
         
       </div>
+      
+      {!isSegundo && 
       <div>
         <Title nome='Imóvel'/>
-          <Dropdown label='Procura:' itens={['Casa', 'Apartamento']} valor={procura} onChange={valor=>setProcura(valor)}/>
-          <Dropdown label='Tipo:' itens={['Novo', 'Usado']} valor={tipoImovel} onChange={valor=>setTipoImovel(valor)}/>
+        <Dropdown label='Procura:' itens={['Casa', 'Apartamento']} valor={procura} onChange={valor=>setProcura(valor)}/>
+        <Dropdown label='Tipo:' itens={['Novo', 'Usado']} valor={tipoImovel} onChange={valor=>setTipoImovel(valor)}/>
       </div>
-        
+      }
       
-      
-    </form>
+    </div>
   )
 }
 
