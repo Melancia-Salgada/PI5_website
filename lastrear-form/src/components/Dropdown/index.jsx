@@ -16,7 +16,7 @@ function Dropdown({label='colocar nome', obrigatorio=false, itens, onChange, val
 
   return (
     <div className='dropdown'>
-      <label>{label}</label>
+      <label>{label} {obrigatorio && '*'}</label>
       <select required={obrigatorio} value={valor} onChange={aoAlterar}>
         <option value=''>Selecione uma opção</option> 
         {itens.map(item => <option key={item} value={item}>{item}</option>)}

@@ -47,35 +47,29 @@ function Input({label=false, type ='', name, placeholder='', valor, onChange, ob
 
 
   const aoAlterar = (e) => {
-  let valorDigitado = e.target.value;
+    let valorDigitado = e.target.value;
 
-  if (type === 'tel') {
-    valorDigitado = formatarTelefone(valorDigitado);
-  } 
-  if (type === 'cpf') {
-    valorDigitado = formatarCPF(valorDigitado);
-  } 
-  if (type === 'money') {
-    valorDigitado = formatarDinheiro(valorDigitado);
-  } 
-  if (type === 'data') {
-    valorDigitado = formatarData(valorDigitado);
-  }
+    if (type === 'tel') {
+      valorDigitado = formatarTelefone(valorDigitado);
+    } 
+    if (type === 'cpf') {
+      valorDigitado = formatarCPF(valorDigitado);
+    } 
+    if (type === 'money') {
+      valorDigitado = formatarDinheiro(valorDigitado);
+    } 
+    if (type === 'data') {
+      valorDigitado = formatarData(valorDigitado);
+    }
 
-  onChange(valorDigitado);
-};
-
-
-
-
-
-
+    onChange(valorDigitado);
+  };
 
   
   return (
     <div className={`input ${type}`}>
       {label && 
-      <label>{label}</label>
+      <label>{label} {obrigatorio && '*'}</label>
       }
       <input type={type} onChange={aoAlterar} name={name} required={obrigatorio} placeholder={placeholder} value={valor} onWheel={(e) => e.target.blur()}/>
     </div>

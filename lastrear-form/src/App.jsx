@@ -18,6 +18,40 @@ function App() {
 
   async function onClick(evento) {
     evento.preventDefault();
+    
+    function validarCamposObrigatorios(dados) {
+      const camposObrigatorios = [
+        "nome",
+        "email",
+        "cpf",
+        "telefone1",
+        "nascimento",
+        "estCivil",
+        "imposto",
+        "restricao",
+        "tipoRenda",
+        "usarFgts",
+        "imovelNome",
+      ];
+
+      const todosPreenchidos = camposObrigatorios.every((campo) => {
+        const valor = dados[campo];
+        return valor !== undefined && valor !== null && valor.toString().trim() !== "";
+      });
+
+      if (!todosPreenchidos) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Atenção!',
+          text: "Por favor, preencha todos os campos obrigatórios.",
+          confirmButtonColor: "#DBB850",
+        });
+      }
+      return todosPreenchidos;
+    }
+
+    if (!validarCamposObrigatorios(dadosPart1)) return;
+    if (segundoParticipante === true && !validarCamposObrigatorios(dadosPart2)) return;
 
     const formatDate = (date) => {
       const [day, month, year] = date.split("/");
