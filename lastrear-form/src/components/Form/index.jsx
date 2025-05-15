@@ -206,8 +206,8 @@ function Form({segundoParticipante, onChangePart='', isSegundo, setDados, setRes
       {!isSegundo && 
       <div>
         <Title nome='Imóvel'/>
-        <Dropdown label='Procura:' itens={['Casa', 'Apartamento']} valor={procura} onChange={valor=>setProcura(valor)}/>
-        <Dropdown label='Tipo:' itens={['Novo', 'Usado']} valor={tipoImovel} onChange={valor=>setTipoImovel(valor)}/>
+        <Dropdown obrigatorio label='Procura:' itens={['Casa', 'Apartamento']} valor={procura} onChange={valor=>setProcura(valor)}/>
+        <Dropdown obrigatorio label='Tipo:' itens={['Novo', 'Usado']} valor={tipoImovel} onChange={valor=>setTipoImovel(valor)}/>
       </div>
       }
       
