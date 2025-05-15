@@ -1,4 +1,5 @@
 import { use, useEffect, useState } from "react";
+import axios from 'axios';
 import "./App.scss";
 import Header from "./components/Header";
 import Form from "./components/Form";
@@ -14,7 +15,7 @@ function App() {
   const [dadosPart2, setDadosPart2] = useState({});
   const [resetForm, setResetForm] = useState(false);
 
-  function onClick(evento) {
+  async function onClick(evento) {
     evento.preventDefault();
 
     const formatDate = (date) => {
@@ -26,54 +27,76 @@ function App() {
       return Number(value.replace("R$", "").replace(".", "").replace(",", "."));
     };
 
-    const dadosFormatados = {
+    
+    function cleanObject(obj) {
+      return Object.fromEntries(
+        Object.entries(obj)
+          .filter(([_, value]) => value !== '' && value !== null && value !== undefined)
+      );
+    }
+
+
+    const participante1 = cleanObject({
+      nome: dadosPart1.nome,
+      cpf: dadosPart1.cpf,
+      email: dadosPart1.email,
+      telefone1: dadosPart1.telefone1,
+      telefone2: dadosPart1.telefone2,
+      dataNascimento: formatDate(dadosPart1.nascimento),
+      estadoCivil: dadosPart1.estCivil.toUpperCase(),
+      restricaoNoNome: dadosPart1.restricao,
+      valorRestricao: formatMoney(dadosPart1.valorRestricao) || 0,
+      tipoDeRenda: dadosPart1.tipoRenda?.toUpperCase(),
+      umMesDeCarteiraAssinada: dadosPart1.tempoCarteira,
+      rendaBrutaFormal: Number(dadosPart1.rendaFormal) || 0,
+      rendaBrutaInformal: Number(dadosPart1.rendaInformal) || 0,
+      tresAnosFgts: dadosPart1.anoFgts,
+      vaiUtilizarFgts: dadosPart1.usarFgts,
+      declaraIRPF: dadosPart1.imposto,
+      possuiImovelRegistradoNoNome: dadosPart1.imovelNome,
+    });
+
+    let dadosFormatados = {
       procura: dadosPart1.procura.toUpperCase(),
       tipo: dadosPart1.tipoImovel.toUpperCase(),
       segundoParticipante: dadosPart1.segundoParticipante,
-      participante1: {
-        nome: dadosPart1.nome,
-        cpf: dadosPart1.cpf,
-        email: dadosPart1.email,
-        telefone1: dadosPart1.telefone1,
-        telefone2: dadosPart1.telefone2,
-        dataNascimento: formatDate(dadosPart1.nascimento),
-        estadoCivil: dadosPart1.estCivil.toUpperCase(),
-        restricaoNoNome: dadosPart1.restricao,
-        valorRestricao: formatMoney(dadosPart1.valorRestricao) || 0,
-        tipoDeRenda: dadosPart1.tipoRenda?.toUpperCase(),
-        umMesDeCarteiraAssinada: dadosPart1.tempoCarteira,
-        rendaBrutaFormal: Number(dadosPart1.rendaFormal) || 0,
-        rendaBrutaInformal: Number(dadosPart1.rendaInformal) || 0,
-        tresAnosFgts: dadosPart1.anoFgts,
-        vaiUtilizarFgts: dadosPart1.usarFgts,
-        declaraIRPF: dadosPart1.imposto,
-        possuiImovelRegistradoNoNome: dadosPart1.imovelNome,
-        complecaoDeRenda: dadosPart1.segundoParticipante,
-      },
-      ...(segundoParticipante === true && {
-        participante2: {
-          nome: dadosPart2.nome,
-          cpf: dadosPart2.cpf,
-          email: dadosPart2.email,
-          telefone1: dadosPart2.telefone1,
-          telefone2: dadosPart2.telefone2,
-          dataNascimento: formatDate(dadosPart2.nascimento),
-          estadoCivil: dadosPart2.estCivil,
-          restricaoNoNome: dadosPart2.restricao,
-          valorRestricao: formatMoney(dadosPart2.valorRestricao) || 0,
-          tipoDeRenda: dadosPart2.tipoRenda?.toUpperCase(),
-          umMesDeCarteiraAssinada: dadosPart2.tempoCarteira,
-          rendaBrutaFormal: Number(dadosPart2.rendaFormal) || 0,
-          rendaBrutaInformal: Number(dadosPart2.rendaInformal) || 0,
-          tresAnosFgts: dadosPart2.anoFgts,
-          vaiUtilizarFgts: dadosPart2.usarFgts,
-          declaraIRPF: dadosPart2.imposto,
-          possuiImovelRegistradoNoNome: dadosPart2.imovelNome,
-        },
-      }),
+      participante1,
     };
 
-    console.log(dadosFormatados);
+    if (segundoParticipante === true) {
+      const participante2 = cleanObject({
+        nome: dadosPart2.nome,
+        cpf: dadosPart2.cpf,
+        email: dadosPart2.email,
+        telefone1: dadosPart2.telefone1,
+        telefone2: dadosPart2.telefone2,
+        dataNascimento: formatDate(dadosPart2.nascimento),
+        estadoCivil: dadosPart2.estCivil.toUpperCase(),
+        restricaoNoNome: dadosPart2.restricao,
+        valorRestricao: formatMoney(dadosPart2.valorRestricao) || 0,
+        tipoDeRenda: dadosPart2.tipoRenda?.toUpperCase(),
+        umMesDeCarteiraAssinada: dadosPart2.tempoCarteira,
+        rendaBrutaFormal: Number(dadosPart2.rendaFormal) || 0,
+        rendaBrutaInformal: Number(dadosPart2.rendaInformal) || 0,
+        tresAnosFgts: dadosPart2.anoFgts,
+        vaiUtilizarFgts: dadosPart2.usarFgts,
+        declaraIRPF: dadosPart2.imposto,
+        possuiImovelRegistradoNoNome: dadosPart2.imovelNome,
+      });
+
+      dadosFormatados.participante2 = participante2;
+    }
+
+
+    console.log(dadosFormatados)
+
+    try {
+      const response = await axios.post('http://localhost:8080/Registros', dadosFormatados)
+      console.log('Dados enviados com sucesso:', response.data)
+    } catch (error) {
+      console.error('Erros ao enviar dados:', error)
+      
+    }
 
     setResetForm(true);
     setDadosPart1({});
