@@ -5,12 +5,14 @@ function Input({label=false, type ='', name, placeholder='', valor, onChange, ob
   
 
   const formatarTelefone = (valor) => {
-    return valor
-      .replace(/\D/g, '') 
-      .replace(/^(\d{2})(\d)/, '($1) $2')
-      .replace(/(\d{5})(\d{1,4})$/, '$1-$2') 
-      .slice(0, 15); 
+    const numeros = valor.replace(/\D/g, '').slice(0, 11);
+    const temNoveDigitos = numeros.length > 10;
+    
+    return numeros
+      .replace(/(\d{2})(\d)/, '($1) $2')
+      .replace(temNoveDigitos ? /(\d{5})(\d)/ : /(\d{4})(\d)/, '$1-$2');
   };
+
 
   const formatarCPF = (valor) => {
     return valor
