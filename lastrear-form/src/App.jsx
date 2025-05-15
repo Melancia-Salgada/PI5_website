@@ -28,7 +28,8 @@ function App() {
 
     const dadosFormatados = {
       procura: dadosPart1.procura.toUpperCase(),
-      tipoImovel: dadosPart1.tipoImovel.toUpperCase(),
+      tipo: dadosPart1.tipoImovel.toUpperCase(),
+      segundoParticipante: dadosPart1.segundoParticipante,
       participante1: {
         nome: dadosPart1.nome,
         cpf: dadosPart1.cpf,

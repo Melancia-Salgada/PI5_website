@@ -13,13 +13,14 @@ function Input({label=false, type ='', name, placeholder='', valor, onChange, ob
   };
 
   const formatarCPF = (valor) => {
-  return valor
-    .replace(/\D/g, '') 
-    .replace(/(\d{3})(\d)/, '$1.$2') 
-    .replace(/(\d{3})(\d)/, '$1.$2') 
-    .replace(/(\d{3})(\d{1,2})$/, '$1-$2') 
-    .slice(0, 14); 
+    return valor
+      .replace(/\D/g, '')
+      .slice(0, 11) 
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
   };
+  
 
   const formatarDinheiro = (valor) => {
     const numeros = valor.replace(/\D/g, ''); 
@@ -48,11 +49,14 @@ function Input({label=false, type ='', name, placeholder='', valor, onChange, ob
 
   if (type === 'tel') {
     valorDigitado = formatarTelefone(valorDigitado);
-  } else if (type === 'cpf') {
+  } 
+  if (type === 'cpf') {
     valorDigitado = formatarCPF(valorDigitado);
-  } else if (type === 'money') {
+  } 
+  if (type === 'money') {
     valorDigitado = formatarDinheiro(valorDigitado);
-  } else if (type === 'data') {
+  } 
+  if (type === 'data') {
     valorDigitado = formatarData(valorDigitado);
   }
 
