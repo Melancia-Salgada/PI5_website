@@ -1,5 +1,6 @@
 import { use, useEffect, useState } from "react";
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import "./App.scss";
 import Header from "./components/Header";
 import Form from "./components/Form";
@@ -92,17 +93,29 @@ function App() {
 
     try {
       const response = await axios.post('http://localhost:8080/Registros', dadosFormatados)
-      console.log('Dados enviados com sucesso:', response.data)
+      
+      Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: 'Os dados foram enviados com sucesso.',
+        confirmButtonColor: '#DBB850'
+      });
+      
+      setResetForm(true);
+      setDadosPart1({});
+      setDadosPart2({});
+      
+      
     } catch (error) {
       console.error('Erros ao enviar dados:', error)
-      
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro!',
+        html: 'Ocorreu um erro ao enviar os dados.<br/>Tente novamente.',
+        confirmButtonColor: '#DBB850'
+      });
     }
-
-    setResetForm(true);
-    setDadosPart1({});
-    setDadosPart2({});
-    window.scrollTo(0, 0);
-
+    
   }
 
   return (
