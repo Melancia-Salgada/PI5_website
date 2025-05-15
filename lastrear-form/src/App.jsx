@@ -9,6 +9,9 @@ import Footer from "./components/Footer";
 import Button from "./components/Button";
 import { FaWhatsapp } from "react-icons/fa";
 import Bubble from "./components/Bubble";
+import { validarCPF } from './utils/validarCPF';
+import { validarData } from './utils/validarData';
+
 
 function App() {
   const [segundoParticipante, setSegundoParticipante] = useState("");
@@ -49,6 +52,56 @@ function App() {
       }
       return todosPreenchidos;
     }
+    
+
+    const txtNasc = segundoParticipante? 'Por favor, insira uma data de nascimento válida para o participante 1.':'Por favor, insira uma data de nascimento válida.'
+    const txtCpf = segundoParticipante? 'Por favor, insira um CPF válido para o participante 1.':'Por favor, insira um CPF válido.'
+    
+    if (!validarCPF(dadosPart1.cpf)) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'CPF inválido!',
+        text: txtCpf,
+        confirmButtonColor: "#DBB850",
+      });
+      return;
+    }
+
+    if (!validarData(dadosPart1.nascimento)) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data inválida!',
+        text: txtNasc,
+        confirmButtonColor: "#DBB850",
+      });
+      return;
+    }
+
+    if (!validarCamposObrigatorios(dadosPart1)) return;
+
+    if (segundoParticipante === true) {
+      if (!validarCPF(dadosPart2.cpf)) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'CPF inválido!',
+          text: 'Por favor, insira um CPF válido para o participante 2.',
+          confirmButtonColor: "#DBB850",
+        });
+        return;
+      }
+
+      if (!validarData(dadosPart2.nascimento)) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Data inválida! ',
+          text: 'Por favor, insira uma data de nascimento válida para o participante 2.',
+          confirmButtonColor: "#DBB850",
+        });
+        return;
+      }
+
+      if (!validarCamposObrigatorios(dadosPart2)) return;
+    }    
 
     if (!validarCamposObrigatorios(dadosPart1)) return;
     if (segundoParticipante === true && !validarCamposObrigatorios(dadosPart2)) return;
