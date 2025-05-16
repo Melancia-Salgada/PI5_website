@@ -158,8 +158,8 @@ function Form({segundoParticipante, onChangePart='', isSegundo, setDados, setRes
         </div>
 
         <div className='divider'>
-          <Input obrigatorio label='Nacionalidade' type='text' name='nacionalidade' valor={nacionalidade} onChange={valor => setNacionalidade(valor)} placeholder='Nacionalidade'/>
-          <Input obrigatorio label='Escolaridade' type='text' name='escolaridade' valor={escolaridade} onChange={valor => setEscolaridade(valor)} placeholder='Escolaridade'/>
+          <Input label='Nacionalidade' type='text' name='nacionalidade' valor={nacionalidade} onChange={valor => setNacionalidade(valor)} placeholder='Nacionalidade'/>
+          <Input label='Escolaridade' type='text' name='escolaridade' valor={escolaridade} onChange={valor => setEscolaridade(valor)} placeholder='Escolaridade'/>
         </div>
       </div>
 

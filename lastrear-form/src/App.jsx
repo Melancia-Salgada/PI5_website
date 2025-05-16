@@ -35,6 +35,7 @@ function App() {
         "tipoRenda",
         "usarFgts",
         "imovelNome",
+        'holerite'
       ];
 
       const todosPreenchidos = camposObrigatorios.every((campo) => {
@@ -52,11 +53,16 @@ function App() {
       }
       return todosPreenchidos;
     }
-    
 
-    const txtNasc = segundoParticipante? 'Por favor, insira uma data de nascimento válida para o participante 1.':'Por favor, insira uma data de nascimento válida.'
-    const txtCpf = segundoParticipante? 'Por favor, insira um CPF válido para o participante 1.':'Por favor, insira um CPF válido.'
     
+    if (!validarCamposObrigatorios(dadosPart1)) return;
+    if (segundoParticipante) {
+      if (!validarCamposObrigatorios(dadosPart2)) return;
+    }
+
+     const txtNasc = segundoParticipante? 'Por favor, insira uma data de nascimento válida para o participante 1.':'Por favor, insira uma data de nascimento válida.'
+    const txtCpf = segundoParticipante? 'Por favor, insira um CPF válido para o participante 1.':'Por favor, insira um CPF válido.'
+
     if (!validarCPF(dadosPart1.cpf)) {
       Swal.fire({
         icon: 'warning',
@@ -76,8 +82,6 @@ function App() {
       });
       return;
     }
-
-    if (!validarCamposObrigatorios(dadosPart1)) return;
 
     if (segundoParticipante === true) {
       if (!validarCPF(dadosPart2.cpf)) {
@@ -100,7 +104,7 @@ function App() {
         return;
       }
 
-      if (!validarCamposObrigatorios(dadosPart2)) return;
+      
     }    
 
     if (!validarCamposObrigatorios(dadosPart1)) return;
@@ -123,6 +127,13 @@ function App() {
       );
     }
 
+    function formatHolerite(texto) {
+      if(texto === false) return 'NAO'
+      if (!texto || typeof texto !== "string") return texto;
+      return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+    
+
 
     const participante1 = cleanObject({
       nome: dadosPart1.nome,
@@ -142,6 +153,7 @@ function App() {
       vaiUtilizarFgts: dadosPart1.usarFgts,
       declaraIRPF: dadosPart1.imposto,
       possuiImovelRegistradoNoNome: dadosPart1.imovelNome,
+      compromissoHolerite: formatHolerite(dadosPart1.holerite).toUpperCase()
     });
 
     let dadosFormatados = {
@@ -170,6 +182,7 @@ function App() {
         vaiUtilizarFgts: dadosPart2.usarFgts,
         declaraIRPF: dadosPart2.imposto,
         possuiImovelRegistradoNoNome: dadosPart2.imovelNome,
+        compromissoHolerite: dadosPart2.holerite
       });
 
       dadosFormatados.participante2 = participante2;
