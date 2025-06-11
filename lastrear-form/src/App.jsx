@@ -35,6 +35,7 @@ function App() {
         "tipoRenda",
         "usarFgts",
         "imovelNome",
+        'holerite'
       ];
 
       const todosPreenchidos = camposObrigatorios.every((campo) => {
@@ -52,11 +53,16 @@ function App() {
       }
       return todosPreenchidos;
     }
-    
 
-    const txtNasc = segundoParticipante? 'Por favor, insira uma data de nascimento válida para o participante 1.':'Por favor, insira uma data de nascimento válida.'
-    const txtCpf = segundoParticipante? 'Por favor, insira um CPF válido para o participante 1.':'Por favor, insira um CPF válido.'
     
+    if (!validarCamposObrigatorios(dadosPart1)) return;
+    if (segundoParticipante) {
+      if (!validarCamposObrigatorios(dadosPart2)) return;
+    }
+
+     const txtNasc = segundoParticipante? 'Por favor, insira uma data de nascimento válida para o participante 1.':'Por favor, insira uma data de nascimento válida.'
+    const txtCpf = segundoParticipante? 'Por favor, insira um CPF válido para o participante 1.':'Por favor, insira um CPF válido.'
+
     if (!validarCPF(dadosPart1.cpf)) {
       Swal.fire({
         icon: 'warning',
@@ -76,8 +82,6 @@ function App() {
       });
       return;
     }
-
-    if (!validarCamposObrigatorios(dadosPart1)) return;
 
     if (segundoParticipante === true) {
       if (!validarCPF(dadosPart2.cpf)) {
@@ -100,7 +104,7 @@ function App() {
         return;
       }
 
-      if (!validarCamposObrigatorios(dadosPart2)) return;
+      
     }    
 
     if (!validarCamposObrigatorios(dadosPart1)) return;
@@ -122,6 +126,13 @@ function App() {
           .filter(([_, value]) => value !== '' && value !== null && value !== undefined)
       );
     }
+
+    function formatHolerite(texto) {
+      if(texto === false) return 'NAO'
+      if (!texto || typeof texto !== "string") return texto;
+      return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+    
 
 
     const participante1 = cleanObject({
