@@ -142,6 +142,9 @@ function App() {
       vaiUtilizarFgts: dadosPart1.usarFgts,
       declaraIRPF: dadosPart1.imposto,
       possuiImovelRegistradoNoNome: dadosPart1.imovelNome,
+      compromissoHolerite: typeof dadosPart1.holerite === 'string'
+    ? dadosPart1.holerite.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase()
+    : ''
     });
 
     let dadosFormatados = {
@@ -170,6 +173,9 @@ function App() {
         vaiUtilizarFgts: dadosPart2.usarFgts,
         declaraIRPF: dadosPart2.imposto,
         possuiImovelRegistradoNoNome: dadosPart2.imovelNome,
+        compromissoHolerite: typeof dadosPart2.holerite === 'string'
+    ? dadosPart2.holerite.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase()
+    : ''
       });
 
       dadosFormatados.participante2 = participante2;
@@ -179,7 +185,7 @@ function App() {
     console.log(dadosFormatados)
 
     try {
-      const response = await axios.post('http://localhost:8080/Registros', dadosFormatados)
+      const response = await axios.post('http://localhost:8080/registros', dadosFormatados)
       
       Swal.fire({
         icon: 'success',
